@@ -4,17 +4,19 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 def inicio():
-    while True:
-        a = float(input('Insira o valor de a: '))
-        if a == 0:
-            utils.red_print('a deve ser diferente de 0...')
-        else:
-            break
-    b = float(input('Insira o valor de b: '))
-    c = float(input('Insira o valor de c: '))
+    try:
+        while True:
+            a = float(input('Insira o valor de a: '))
+            if a == 0:
+                utils.red_print('a deve ser diferente de 0...')
+            else:
+                break
+        b = float(input('Insira o valor de b: '))
+        c = float(input('Insira o valor de c: '))
 
-
-    delta = (b*b) - (4 * a * c)
+        delta = (b*b) - (4 * a * c)
+    except:
+        utils.red_print('Algo deu errado, tente novamente...')
 
     while True:
         print()
@@ -37,6 +39,24 @@ def calc_raiz(a,b,c, delta):
 
     if delta < 0:
         utils.red_print('Não tem raizes reais\n')
+
+        delta = abs(delta)
+
+        x1a = -b / (2 * a)
+        x1b = math.sqrt(delta) / (2 * a)
+
+        x2a = -b / (2 * a)
+        x2b = -math.sqrt(delta) / (2 * a)
+
+        if x1b < 0:
+            utils.blue_print('\nX1 = ' + str(x1a) + str(x1b) + 'i')
+        else:
+            utils.blue_print('\nX1 = ' + str(x1a) + '+' + str(x1b) + 'i')
+
+        if x2b < 0:
+            utils.blue_print('X2 = ' + str(x2a) + str(x2b) + 'i')
+        else:
+            utils.blue_print('X2 = ' + str(x2a) + '+' + str(x2b) + 'i')
         return
     elif delta == 0:
         print('Duas raízes iguais')

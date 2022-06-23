@@ -2,27 +2,29 @@ import utils
 import numpy as np
 
 def inicio():
-    lin = int(input('Número de linhas da matriz: '))
-    col = int(input('Número de colunas da matriz: '))
-    matriz = gerar_matriz(lin, col)
+    try:
+        lin = int(input('Número de linhas da matriz: '))
+        col = int(input('Número de colunas da matriz: '))
+        matriz = gerar_matriz(lin, col)
 
-    utils.green_print('\nMatriz criada:')
-    printar_matriz(matriz)
+        utils.green_print('\nMatriz criada:')
+        printar_matriz(matriz)
 
-    while True:
-        print()
-        opcao = utils.escolher_opcoes('Determinante (2x2 ou 3x3)',
-                                      'Multiplicação',
-                                      'Matriz transposta')
-        if opcao == '1':
-            utils.blue_print('Resultado: ' + str(determinante(matriz)))
-        elif opcao == '2':
-            multiplicar(matriz)
-        elif opcao == '3':
-            transposta(matriz)
-        elif opcao == '':
-            break
-
+        while True:
+            print()
+            opcao = utils.escolher_opcoes('Determinante (2x2 ou 3x3)',
+                                          'Multiplicação',
+                                          'Matriz transposta')
+            if opcao == '1':
+                utils.blue_print('Resultado: ' + str(determinante(matriz)))
+            elif opcao == '2':
+                multiplicar(matriz)
+            elif opcao == '3':
+                transposta(matriz)
+            elif opcao == '':
+                break
+    except:
+        utils.red_print('Algo deu errado, tente novamente...')
 
 def determinante(matriz):
     lin = len(matriz)
@@ -54,6 +56,8 @@ def determinante(matriz):
             det -= sarrus[0][i] * sarrus[1][i-1] * sarrus[2][i-2]
 
         return det
+    else:
+        utils.red_print('Deve ter ordem 3 para baixo...')
 
 def multiplicar(matriz):
     col1 = len(matriz[0])
